@@ -1,14 +1,32 @@
 # XOR Verifier Sandbox
 
-This repository is used for testing XOR agent abilities.
+**Purpose**: Test repository for XOR ability verification system.
 
-## Test Cases
+> **WARNING**: This repository contains INTENTIONAL security issues for testing. Do not use this code in production.
 
-### ABILITY-001: CVE Autopatch
-Contains a vulnerable `requirements.txt` for testing automated CVE patching.
+## Contents
 
-### ABILITY-002: PR Audit
-Create PRs and test the audit packet generation.
+### Vulnerable Dependencies (ABILITY-001 testing)
+- `requirements.txt` contains outdated packages with known CVEs
 
-### ABILITY-003: GHA Hardening
-Contains un-pinned GitHub Actions workflows for testing action pinning.
+### Unpinned/Overprivileged Workflows (ABILITY-003 testing)
+- `.github/workflows/unpinned.yml` - Actions without SHA pinning
+- `.github/workflows/overprivileged.yml` - Overly broad permissions
+
+### Risky Code (ABILITY-004 testing)
+- `src/risky_code.py` - Code with security smells (eval, shell injection, etc.)
+- `src/clean_code.py` - Control: well-written secure code
+
+## Usage
+
+This repo is used by XOR's ability verification CI:
+1. Integration tests create PRs in this repo
+2. Abilities run against those PRs
+3. Tests verify abilities produce expected outputs
+4. PRs are cleaned up automatically
+
+## Do Not
+
+- Use any code from this repo in production
+- Manually create PRs (they may be auto-closed)
+- Modify without updating corresponding test cases in `xor` repo
