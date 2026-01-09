@@ -1,0 +1,12 @@
+name: Overprivileged Workflow
+on: [push]
+
+# INTENTIONAL: Overly broad permissions for ABILITY-003 testing
+permissions: write-all
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - run: echo "This workflow has overprivileged permissions"
