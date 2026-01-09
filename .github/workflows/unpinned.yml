@@ -1,0 +1,13 @@
+name: Unpinned Actions Test
+on: [push]
+
+# INTENTIONAL: No permissions block for ABILITY-003 testing
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    steps:
+      # INTENTIONAL: Unpinned action (uses tag instead of SHA)
+      - uses: actions/checkout@main
+      - uses: actions/setup-python@v5
+      - run: echo "This workflow has unpinned actions"
